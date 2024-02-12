@@ -1,0 +1,707 @@
+Script started on Mon 12 Feb 2024 08:49:58 AM UTC
+]0;vagrant@lvm:~[?1034h[vagrant@lvm ~]$ lsblk
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                       8:0    0   40G  0 disk 
+├─sda1                    8:1    0    1M  0 part 
+├─sda2                    8:2    0    1G  0 part /boot
+└─sda3                    8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00 253:0    0 37.5G  0 lvm  /
+  └─VolGroup00-LogVol01 253:1    0  1.5G  0 lvm  [SWAP]
+sdb                       8:16   0   10G  0 disk 
+sdc                       8:32   0    2G  0 disk 
+sdd                       8:48   0    1G  0 disk 
+sde                       8:64   0    1G  0 disk 
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo yum install xfsdump
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.docker.ru
+ * extras: mirror.docker.ru
+ * updates: mirror.docker.ru
+Resolving Dependencies
+--> Running transaction check
+---> Package xfsdump.x86_64 0:3.1.7-4.el7_9 will be installed
+--> Processing Dependency: attr >= 2.0.0 for package: xfsdump-3.1.7-4.el7_9.x86_64
+--> Running transaction check
+---> Package attr.x86_64 0:2.4.46-13.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package          Arch            Version                Repository        Size
+================================================================================
+Installing:
+ xfsdump          x86_64          3.1.7-4.el7_9          updates          309 k
+Installing for dependencies:
+ attr             x86_64          2.4.46-13.el7          base              66 k
+
+Transaction Summary
+================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 375 k
+Installed size: 1.1 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(2/2): xfsdump-3.1.7-4.el7 0% [                 ]  0.0 B/s |    0 B   --:-- ETA (1/2): attr-2.4.46-13.el7.x86_64.rpm                       |  66 kB   00:00     
+(2/2): xfsdump-3.1.7-4.el7_9.x86_64.rpm                    | 309 kB   00:00     
+--------------------------------------------------------------------------------
+Total                                              737 kB/s | 375 kB  00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : attr-2.4.46-13.el7.x86_64 [                                ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#                               ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#####                           ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [########                        ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#########                       ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [############                    ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#############                   ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [################                ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [####################            ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#####################           ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [######################          ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#######################         ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [########################        ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#########################       ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [##########################      ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [###########################     ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [#############################   ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [##############################  ] 1/2  Installing : attr-2.4.46-13.el7.x86_64 [############################### ] 1/2  Installing : attr-2.4.46-13.el7.x86_64                                    1/2 
+  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [                             ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [#                            ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [###                          ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [#####                        ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [#######                      ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [########                     ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [##########                   ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [############                 ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [##############               ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [################             ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [##################           ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [####################         ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [#####################        ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [######################       ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [#######################      ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [########################     ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [#########################    ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [###########################  ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64 [############################ ] 2/2  Installing : xfsdump-3.1.7-4.el7_9.x86_64                                 2/2 
+  Verifying  : attr-2.4.46-13.el7.x86_64                                    1/2 
+  Verifying  : xfsdump-3.1.7-4.el7_9.x86_64                                 2/2 
+
+Installed:
+  xfsdump.x86_64 0:3.1.7-4.el7_9                                                
+
+Dependency Installed:
+  attr.x86_64 0:2.4.46-13.el7                                                   
+
+Complete!
+]0;vagrant@lvm:~[vagrant@lvm ~]$ pvcreate /dev/sdb[1@s[1@u[1@d[1@o[1@ 
+  Physical volume "/dev/sdb" successfully created.
+]0;vagrant@lvm:~[vagrant@lvm ~]$ vgcreate vg_root /dev/sdb[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@s[1@u[1@d[1@o[1@ 
+  Volume group "vg_root" successfully created
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo lvcreate -n lv_root -l +100%FREE /dev/vg_root
+  Logical volume "lv_root" created.
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo mkfs.xfs /dev/vg_root/lv_root
+meta-data=/dev/vg_root/lv_root   isize=512    agcount=4, agsize=655104 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=2620416, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo mount /dev/vg_root/lv_root /mnt
+]0;vagrant@lvm:~[vagrant@lvm ~]$ xfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt[1@s[1@udxfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Coxfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mntt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C xfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csxfsrestore -J - /mnt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cuxfsrestore -J - /mnt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdxfsrestore -J - /mnt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Coxfsrestore -J - /mnt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C xfsrestore -J - /mnt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsdump: level 0 dump of lvm:/
+xfsdump: dump date: Mon Feb 12 08:52:10 2024
+xfsdump: session id: 8970c575-57fa-42b5-a894-5dec6d738cba
+xfsdump: session label: ""
+xfsrestore: searching media for dump
+xfsdump: ino map phase 1: constructing initial dump list
+xfsdump: ino map phase 2: skipping (no pruning necessary)
+xfsdump: ino map phase 3: skipping (only one dump stream)
+xfsdump: ino map construction complete
+xfsdump: estimated dump size: 945544384 bytes
+xfsdump: creating dump session media file 0 (media 0, file 0)
+xfsdump: dumping ino map
+xfsdump: dumping directories
+xfsrestore: examining media file 0
+xfsrestore: dump description: 
+xfsrestore: hostname: lvm
+xfsrestore: mount point: /
+xfsrestore: volume: /dev/mapper/VolGroup00-LogVol00
+xfsrestore: session time: Mon Feb 12 08:52:10 2024
+xfsrestore: level: 0
+xfsrestore: session label: ""
+xfsrestore: media label: ""
+xfsrestore: file system id: b60e9498-0baa-4d9f-90aa-069048217fee
+xfsrestore: session id: 8970c575-57fa-42b5-a894-5dec6d738cba
+xfsrestore: media id: 0473d3b5-c4ab-4a8a-b621-1b78c219d7cc
+xfsrestore: searching media for directory dump
+xfsrestore: reading directories
+xfsdump: dumping non-directory files
+xfsrestore: 3108 directories and 26874 entries processed
+xfsrestore: directory post-processing
+xfsrestore: restoring non-directory files
+xfsdump: ending media file
+xfsdump: media file size 917753344 bytes
+xfsdump: dump size (non-dir files) : 902611632 bytes
+xfsdump: dump complete: 17 seconds elapsed
+xfsdump: Dump Status: SUCCESS
+xfsrestore: restore complete: 18 seconds elapsed
+xfsrestore: Restore Status: SUCCESS
+]0;vagrant@lvm:~[vagrant@lvm ~]$ ls -l /mnt
+total 12
+lrwxrwxrwx.  1 root    root       7 Feb 12 08:52 [0m[38;5;51mbin[0m -> [38;5;27musr/bin[0m
+drwxr-xr-x.  2 root    root       6 May 12  2018 [38;5;27mboot[0m
+drwxr-xr-x.  2 root    root       6 May 12  2018 [38;5;27mdev[0m
+drwxr-xr-x. 80 root    root    8192 Feb 12 08:49 [38;5;27metc[0m
+drwxr-xr-x.  3 root    root      21 May 12  2018 [38;5;27mhome[0m
+lrwxrwxrwx.  1 root    root       7 Feb 12 08:52 [38;5;51mlib[0m -> [38;5;27musr/lib[0m
+lrwxrwxrwx.  1 root    root       9 Feb 12 08:52 [38;5;51mlib64[0m -> [38;5;27musr/lib64[0m
+drwxr-xr-x.  2 root    root       6 Apr 11  2018 [38;5;27mmedia[0m
+drwxr-xr-x.  2 root    root       6 Apr 11  2018 [38;5;27mmnt[0m
+drwxr-xr-x.  2 root    root       6 Apr 11  2018 [38;5;27mopt[0m
+drwxr-xr-x.  2 root    root       6 May 12  2018 [38;5;27mproc[0m
+dr-xr-x---.  3 root    root     149 Feb 12 08:45 [38;5;27mroot[0m
+drwxr-xr-x.  2 root    root       6 May 12  2018 [38;5;27mrun[0m
+lrwxrwxrwx.  1 root    root       8 Feb 12 08:52 [38;5;51msbin[0m -> [38;5;27musr/sbin[0m
+drwxr-xr-x.  2 root    root       6 Apr 11  2018 [38;5;27msrv[0m
+drwxr-xr-x.  2 root    root       6 May 12  2018 [38;5;27msys[0m
+drwxrwxrwt.  8 root    root     256 Feb 12 08:50 [48;5;10;38;5;16mtmp[0m
+drwxr-xr-x. 13 root    root     155 May 12  2018 [38;5;27musr[0m
+drwxrwxr-x.  2 vagrant vagrant   25 Feb  1 14:10 [38;5;27mvagrant[0m
+drwxr-xr-x. 18 root    root     254 Feb 12 08:45 [38;5;27mvar[0m
+]0;vagrant@lvm:~[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /m nt/$i; done[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csmount --bind $i /m[1@n[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cumount --bind $i /[1@m[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdmount --bind $i [1@/[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Comount --bind $i[1@ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C mount --bind $[1@i[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;vagrant@lvm:~[vagrant@lvm ~]$ chroot /mnt/[1@s[1@u[1@d[1@o[1@ 
+]0;root@lvm:/[?1034h[root@lvm /]# grub2-mkconfig -o /boot/grub2/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.10.0-862.2.3.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img
+done
+]0;root@lvm:/[root@lvm /]# cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i| sed "s/initramfs-//g;s/.img//g"` --force; done
+Executing: /sbin/dracut -v initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64 --force
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+*** Including module: bash ***
+*** Including module: nss-softokn ***
+*** Including module: i18n ***
+*** Including module: drm ***
+*** Including module: plymouth ***
+*** Including module: dm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 60-persistent-storage-dm.rules
+Skipping udev rule: 55-dm.rules
+*** Including module: kernel-modules ***
+Omitting driver floppy
+*** Including module: lvm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 56-lvm.rules
+Skipping udev rule: 60-persistent-storage-lvm.rules
+*** Including module: qemu ***
+*** Including module: resume ***
+*** Including module: rootfs-block ***
+*** Including module: terminfo ***
+*** Including module: udev-rules ***
+Skipping udev rule: 40-redhat-cpu-hotplug.rules
+Skipping udev rule: 91-permissions.rules
+*** Including module: biosdevname ***
+*** Including module: systemd ***
+*** Including module: usrmount ***
+*** Including module: base ***
+*** Including module: fs-lib ***
+*** Including module: shutdown ***
+*** Including modules done ***
+*** Installing kernel module dependencies and firmware ***
+*** Installing kernel module dependencies and firmware done ***
+*** Resolving executable dependencies ***
+*** Resolving executable dependencies done***
+*** Hardlinking files ***
+*** Hardlinking files done ***
+*** Stripping files ***
+*** Stripping files done ***
+*** Generating early-microcode cpio image contents ***
+*** No early-microcode cpio image needed ***
+*** Store current command line parameters ***
+*** Creating image file ***
+*** Creating image file done ***
+*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+]0;root@lvm:/boot[root@lvm boot]# mc
+[?1049h[1;47r[4l[47;1H(B[m[37m[40m(B[m[39;49m[K[?1049l[?1001s[?1002h[?1015h7[?47hCannot open master side of pty: No such file or directory (2)
+]0;mc [root@lvm]:/boot>]0;mc [root@lvm]:/boot>[?1049h[1;47r[4l[?1h=(B[m[39m[49m[1;47r[H[2J[2;1H[37m[44m┌<─[30m[47m /boot [37m[44m────────────────────────.[^]>┐
+│[38C│
+│[30m[46m/..              │UP--DIR│Feb 12 08:52[37m[44m│
+│[97m/efi             [37m│[97m     17[37m│[97mMay 12  2018[37m│
+│[97m/grub            [37m│[97m     27[37m│[97mMay 12  2018[37m│
+│[97m/grub2           [37m│[97m     97[37m│[97mFeb 12 08:53[37m│
+│ .vmlinuz~64.hmac│    170│May  9  2018│
+│ System.m~.x86_64│3409102│May  9  2018│
+│ config-3~.x86_64│ 147823│May  9  2018│
+│ initramf~_64.img│ 14258K│Feb 12 08:54│
+│[95m symvers-~6_64.gz[37m│[95m 304926[37m│[95mMay  9  2018[37m│
+│[92m*vmlinuz-~.x86_64[37m│[92m6225056[37m│[92mMay  9  2018[37m│
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+│                 │       │            │
+├[38C┤
+│[38C│
+└─────────────────── 953M/1014M (94%) ─┘
+[39m[49mHint: Are some of your keys not working? Look at Options/Learn keys.
+
+[97m[40m 1[30m[46mHelp  [97m[40m 2[30m[46mMenu  [97m[40m 3[30m[46mView  [97m[40m 4[30m[46mEdit  [97m[40m 5[30m[46mCopy  [97m[40m 6[30m[46mRenMov[97m[40m 7[30m[46mMkdir [97m[40m 8[30m[46mDelete[97m[40m 9[30m[46mPullDn[97m[40m10[30m[46mQuit[K[45;80H]0;mc [root@lvm]:/boot>]0;mc [root@lvm]:/boot>[1;1H  Left     File     Command     Options     Right[K[2;41H[37m[44m┌<─ /boot ────────────────────────.[^]>┐[3;2H[93m'n     Name      [37m│[93m Size  [37m│[93mModify time [37m││[93m'n     Name      [37m│[93m Size  [37m│[93mModify time [37m│[4;41H│[97m/..              [37m│[97mUP--DIR[37m│[97mFeb 12 08:52[37m│[5;41H│[97m/efi             [37m│[97m     17[37m│[97mMay 12  2018[37m│[6;41H│[97m/grub            [37m│[97m     27[37m│[97mMay 12  2018[37m│[7;41H│[97m/grub2           [37m│[97m     97[37m│[97mFeb 12 08:53[37m│[8;41H│ .vmlinuz~64.hmac│    170│May  9  2018│[9;41H│ System.m~.x86_64│3409102│May  9  2018│[10;41H│ config-3~.x86_64│ 147823│May  9  2018│[11;41H│ initramf~_64.img│ 14258K│Feb 12 08:54│[12;41H│[95m symvers-~6_64.gz[37m│[95m 304926[37m│[95mMay  9  2018[37m│[13;41H│[92m*vmlinuz-~.x86_64[37m│[92m6225056[37m│[92mMay  9  2018[37m│[14;41H│                 │       │            │[15;41H│                 │       │            │[16;41H│                 │       │            │[17;41H│                 │       │            │[18;41H│                 │       │            │[19;41H│                 │       │            │[20;41H│                 │       │            │[21;41H│                 │       │            │[22;41H│                 │       │            │[23;41H│                 │       │            │[24;41H│                 │       │            │[25;41H│                 │       │            │[26;41H│                 │       │            │[27;41H│                 │       │            │[28;41H│                 │       │            │[29;41H│                 │       │            │[30;41H│                 │       │            │[31;41H│                 │       │            │[32;41H│                 │       │            │[33;41H│                 │       │            │[34;41H│                 │       │            │[35;41H│                 │       │            │[36;41H│                 │       │            │[37;41H│                 │       │            │[38;41H│                 │       │            │[39;41H│                 │       │            │[40;41H│                 │       │            │[41;41H│                 │       │            │[42;2H──────────────────────────────────────┤├──────────────────────────────────────┤[43;2HUP--DIR                               ││UP--DIR                               │[44;41H└─────────────────── 953M/1014M (94%) ─┘[46;1H[39m[49m#[46;3H[4;2H[97m[44m/..              [37m│[97mUP--DIR[37m│[97mFeb 12 08:52[5;2H[30m[46m/efi             │     17│May 12  2018[43;2H[37m[44m/efi   [46;3H[5;2H[97m/efi             [37m│[97m     17[37m│[97mMay 12  2018[6;2H[30m[46m/grub            │     27│May 12  2018[43;3H[37m[44mgrub[46;3H[6;2H[97m/grub            [37m│[97m     27[37m│[97mMay 12  2018[7;2H[30m[46m/grub2           │     97│Feb 12 08:53[43;7H[37m[44m2[46;3H]0;mc [root@lvm]:/boot/grub2>[2;10H[30m[47m/grub2 [4;2H[46m/..              │UP--DIR│Feb 12 08:54[5;3H[97m[44mfonts[17C25[6;3Hi386-pc[13C8192[7;2H/locale          [37m│[97m      6[37m│[97mMay 12  2018[8;3H[37mdevice.map      [5C 64[5C12[9;3Hgrub.cfg        │   3658│Feb 12 08:53[10;3Hgrubenv         │   1024[5C12[11;3H                │       │            [12;2H                 │       │            [13;2H                 │       │            [43;2HUP--DIR[46;3H[4;2H[97m/..              [37m│[97mUP--DIR[37m│[97mFeb 12 08:54[5;2H[30m[46m/fonts           │     25│May 12  2018[43;2H[37m[44m/fonts [46;3H[5;2H[97m/fonts           [37m│[97m     25[37m│[97mMay 12  2018[6;2H[30m[46m/i386-pc         │   8192│May 12  2018[43;3H[37m[44mi386-pc[46;3H[6;2H[97m/i386-pc         [37m│[97m   8192[37m│[97mMay 12  2018[7;2H[30m[46m/locale          │      6│May 12  2018[43;3H[37m[44mlocale [46;3H[7;2H[97m/locale          [37m│[97m      6[37m│[97mMay 12  2018[8;2H[30m[46m device.map      │     64│May 12  2018[43;2H[37m[44m device.map[46;3H[8;2H device.map      │     64│May 12  2018[9;2H[30m[46m grub.cfg        │   3658│Feb 12 08:53[43;3H[37m[44mgrub.cfg  [46;3H[1;1H[30m[46mgrub.cfg           [----]  0 L:[  1+ 0   1/128] *(0   /3658b) 0035 0x023  [*][X][2;1H[37m[44m#[K
+# DO NOT EDIT THIS FILE[K
+#[K
+# It is automatically generated by grub2-mkconfig using templates[K
+# from /etc/grub.d and settings from /etc/default/grub[K
+#[K
+[K
+### BEGIN /etc/grub.d/00_header ###[K
+set pager=1[K
+[K
+if [ -s $prefix/grubenv ]; then[K
+  load_env[K
+fi[K
+if [ "${next_entry}" ] ; then[K
+   set default="${next_entry}"[K
+   set next_entry=[K
+   save_env next_entry[K
+   set boot_once=true[K
+else[K
+   set default="${saved_entry}"[K
+fi[K
+[K
+if [ x"${feature_menuentry_id}" = xy ]; then[K
+  menuentry_id_option="--id"[K
+else[K
+  menuentry_id_option=""[K
+fi[K
+[K
+export menuentry_id_option[K
+[K
+if [ "${prev_saved_entry}" ]; then[K
+  set saved_entry="${prev_saved_entry}"[K
+  save_env saved_entry[K
+  set prev_saved_entry=[K
+  save_env prev_saved_entry[K
+  set boot_once=true[K
+fi[K
+[K
+function savedefault {[K
+  if [ -z "${boot_once}" ]; then[K
+    saved_entry="${chosen}"[K
+    save_env saved_entry[K
+  fi[K
+}[K
+[K[47;11H[30m[46mSave  [97m[40m 3[30m[46mMark  [97m[40m 4[30m[46mReplac[10CMove  [97m[40m 7[30m[46mSearch[2;1H[15;12H[47m                                                          [16;12H ┌───────────────────────[34m Search [30m───────────────────────┐ [17;12H │ Enter search string:                                 │ [18;12H │ [90m[46m                                                    [30m[47m │ [19;12H ├──────────────────────────────────────────────────────┤ [20;12H │ (*) No[34mr[30mmal                [ ] Cas[34me[30m sensitive         │ [21;12H │ ( ) Re[34mg[30mular expression    [ ] [34mB[30mackwards              │ [22;12H │ ( ) He[34mx[30madecimal           [ ] In se[34ml[30mection           │ [23;12H │ ( ) Wil[34md[30mcard search       [ ] [34mW[30mhole words            │ [24;12H │                           [ ] [34mA[30mll charsets           │ [25;12H ├──────────────────────────────────────────────────────┤ [26;12H │           [< [34mO[30mK >] [ [34mF[30mind all ] [ [34mC[30mancel ]           │ [27;12H └──────────────────────────────────────────────────────┘ [28;12H                                                          [18;15H[46mrd.                                                 [18;18Hlvm.lv=[1;27H197 L:[ 67+33 100/128] *(2572/3658b) 0114 0x072
+[37m[44m[K
+[K
+[K
+[K
+[K
+[K
+
+[K
+[K
+
+[K[13;3H[K
+[K
+[K[16;4H[K[17;4H[K[18;4H[K[19;4H[K
+[K[21;4H[K
+[K
+cted $menuentry_id_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-7c2f3337-[24;1H[K[25;3H[K
+[K[27;3H[K
+[K
+
+[K
+0897ca-e759-4c81-90cf-389da6eee4cc
+[K[33;3H[K[34;3H[K
+,115200n8 net.ifnames=0 biosdevname=0 elevator=noop crashkernel=auto [93m[102mrd.lvm.lv=[37m[44mV[36;3H[K[37;3H[K
+ Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)'; fi;
+
+[K[41;3H[K[42;5H[K[43;5H[K[44;3H[K
+[K[35;70H[1;29H[30m[46m8[25C3[10C00 0x064[35;70H[37m[44mrd.lvm.lv=[35;71H[1;29H[30m[46m9[25C4[9C046 0x02E[35;72H[1;27H200[25C5[9C108 0x06C[35;73H[1;29H1[25C6[10C1[5C76[35;74H[1;29H2[25C7[10C09 0x06D[35;75H[1;29H3[25C8[9C046 0x02E[35;76H[1;29H4[25C9[9C108 0x06C[35;77H[1;29H5[24C80[10C1[5C76[35;78H[1;29H6[25C1[9C061 0x03D[35;79H[1;29H7[25C2[10C86 0x056[35;80H[1;29H8[25C3[9C111 0x06F[23;1H[37m[44mted $menuentry_id_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-7c2f3337-3[31;1H897ca-e759-4c81-90cf-389da6eee4cc[K
+
+
+
+115200n8 net.ifnames=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=Vo[38;1HLinux (3.10.0-862.2.3.el7.x86_64) 7 (Core)'; fi;[K[35;80H[1;29H[30m[46m9[25C4[10C08[5CC[23;1H[37m[44med $menuentry_id_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-7c2f3337-3[31;1H97ca-e759-4c81-90cf-389da6eee4cc[K[35;2H5200n8 net.ifnames=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=Vol[38;1Hinux (3.10.0-862.2.3.el7.x86_64) 7 (Core)'; fi;[K[35;80H[1;29H[30m[46m8[25C3[10C11[5CF[35;79H[1;29H7[25C2[9C086 0x056[35;78H[1;22HM[37C7b) 0111 0x06F[35;78H[37m[44molG[35;78H[1;60H[30m[46m6[5C08[5CC[35;78H[37m[44mlGr[35;78H[1;60H[30m[46m5b) 0071 0x047[35;78H[37m[44mGro[35;78H[1;60H[30m[46m4b) 0114 0x072[35;78H[37m[44mrou[35;78H[1;60H[30m[46m3[6C1 0x06F[35;78H[37m[44moup[35;78H[1;60H[30m[46m2[6C7 0x075[35;78H[37m[44mup0[35;78H[1;60H[30m[46m1[6C2[5C0[35;78H[37m[44mp0[35;78H[1;60H[30m[46m0b) 0048 0x03[35;78H[37m[44m00/[35;78H[1;59H[30m[46m49[35;79H[37m[44m/L[35;78H[1;60H[30m[46m8[6C7 0x02F[35;78H[37m[44m/Lo[35;78H[1;60H[30m[46m7[5C76 0x04C[35;78H[37m[44mLog[35;78H[1;60H[30m[46m6b) 0111 0x06F[35;78H[37m[44mogV[35;78H[1;60H[30m[46m5[5C03[5C7[35;78H[37m[44mgVo[35;78H[1;60H[30m[46m4b) 0086 0x056[35;78H[37m[44mVol[35;78H[1;60H[30m[46m3b) 0111 0x06F[35;78H[37m[44mol0[35;78H[1;60H[30m[46m2[5C08[5CC[35;78H[37m[44ml0[35;78H[1;60H[30m[46m1b) 004[5C30[35;78H[37m[44m00[K[35;78H[1;60H[30m[46m0[35;79H[37m[44m r[35;78H[1;59H[30m[46m39[5C32 0x02[35;78H[37m[44m rd[35;78H[1;28H[30m[46m10[25C5/3642[35;80H[1;29H3[25C8/3645[35;80H[1;29H6[24C91/3648[35;80H[1;29H9[25C4/3651[35;80H[1;28H22[25C7/3654[23;1H[37m[44m_id_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-7c2f3337-333a-4154-95e2-[31;1H1-90cf-389da6eee4cc[K
+
+
+
+fnames=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=vg_root/lv_root[K
+
+
+862.2.3.el7.x86_64) 7 (Core)'; fi;[K[35;80H[1;29H[30m[46m3[25C8[9C114 0x072[23;1H[37m[44mid_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-7c2f3337-333a-4154-95e2-3[31;1H-90cf-389da6eee4cc[K
+
+
+
+names=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=vg_root/lv_root r[38;1H62.2.3.el7.x86_64) 7 (Core)'; fi;[K[35;80H[1;29H[30m[46m4[25C9[10C00 0x064[23;1H[37m[44md_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-7c2f3337-333a-4154-95e2-3e[31;1H90cf-389da6eee4cc[K
+
+
+
+ames=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=vg_root/lv_root rd[38;1H2.2.3.el7.x86_64) 7 (Core)'; fi;[K[35;80H[1;29H[30m[46m5[23C600[9C046 0x02E[23;1H[37m[44m_option 'gnulinux-3.10.0-862.2.3.el7.x86_64-advanced-7c2f3337-333a-4154-95e2-3e7[31;1H0cf-389da6eee4cc[K
+
+
+
+mes=0 biosdevname=0 elevator=noop crashkernel=auto rd.lvm.lv=vg_root/lv_root rd.[38;1H.2.3.el7.x86_64) 7 (Core)'; fi;[K[35;80H[14;19H[30m[47m                                             [15;19H ┌──────────────[34m Close file [30m───────────────┐ [16;19H │ File /boot/grub2/grub.cfg was modified. │ [17;19H │           Save before close?            │ [18;19H ├─────────────────────────────────────────┤ [19;19H │       [ [34mY[30mes ]  [ [34mN[30mo ]  [46m[ [34mC[30mancel ][47m       │ [20;19H └─────────────────────────────────────────┘ [21;19H                                             [19;47H[19;28H[46m[ [34mY[30mes ][10C[47m[ [34mC[30mancel ][19;30H[14;19H[37m[44m[K[15;19H[K[16;19H[K[17;19H[K[18;19H[K[19;19H[K[20;19H[K[21;19H[K[45;1H[39m[49mHint: To mark directories on the select dialog box, append a slash.[K[45;80H[1;1H[30m[46m  Left     File     Command     Options     Right[K
+[37m[44m┌<─[30m[47m /boot/grub2 [37m[44m──────────────────.[^]>┐┌<─ /boot ────────────────────────.[^]>┐[3;1H│[93m'n     Name      [37m│[93m Size  [37m│[93mModify time [37m││[93m'n     Name      [37m│[93m Size  [37m│[93mModify time [37m│[4;1H│[97m/..              [37m│[97mUP--DIR[37m│[97mFeb 12 08:54[37m││[97m/..              [37m│[97mUP--DIR[37m│[97mFeb 12 08:52[37m│[5;1H│[97m/fonts           [37m│[97m     25[37m│[97mMay 12  2018[37m││[97m/efi             [37m│[97m     17[37m│[97mMay 12  2018[37m│[6;1H│[97m/i386-pc         [37m│[97m   8192[37m│[97mMay 12  2018[37m││[97m/grub            [37m│[97m     27[37m│[97mMay 12  2018[37m│[7;1H│[97m/locale          [37m│[97m      6[37m│[97mMay 12  2018[37m││[97m/grub2           [37m│[97m     97[37m│[97mFeb 12 08:53[37m│[8;1H│ device.map[6C│[5C64│May 12  2018││ .vmlinuz~64.hmac│    170│May  9  2018│[9;1H│[30m[46m grub.cfg        │   3658│Feb 12 08:53[37m[44m││ System.m~.x86_64│3409102│May  9  2018│[10;1H│ grubenv[9C│   1024│May 12  2018││ config-3~.x86_64│ 147823│May  9  2018│[11;1H│[17C│[7C│[12C││ initramf~_64.img│ 14258K│Feb 12 08:54│[12;1H│[17C│[7C│[12C││[95m symvers-~6_64.gz[37m│[95m 304926[37m│[95mMay  9  2018[37m│[13;1H│[17C│[7C│[12C││[92m*vmlinuz-~.x86_64[37m│[92m6225056[37m│[92mMay  9  2018[37m│[14;1H│[17C│[7C│[12C││[17C│[7C│[12C│[15;1H│[17C│[7C│[12C││[17C│[7C│[12C│[16;1H│[17C│[7C│[12C││[17C│[7C│[12C│[17;1H│[17C│[7C│[12C││[17C│[7C│[12C│[18;1H│[17C│[7C│[12C││[17C│[7C│[12C│[19;1H│[17C│[7C│[12C││[17C│[7C│[12C│[20;1H│[17C│[7C│[12C││[17C│[7C│[12C│[21;1H│[17C│[7C│[12C││[17C│[7C│[12C│[22;1H│[17C│[7C│[12C││[17C│[7C│[12C│[23;1H│                 │       │            ││                 │       │            │[24;1H│[17C│[7C│[12C││[17C│[7C│[12C│[25;1H│[17C│[7C│[12C││[17C│[7C│[12C│[26;1H│[17C│[7C│[12C││[17C│[7C│[12C│[27;1H│[17C│[7C│[12C││[17C│[7C│[12C│[28;1H│[17C│[7C│[12C││[17C│[7C│[12C│[29;1H│[17C│[7C│[12C││[17C│[7C│[12C│[30;1H│[17C│[7C│[12C││[17C│[7C│[12C│[31;1H│                 │[7C│[12C││[17C│[7C│[12C│[32;1H│[17C│[7C│[12C││[17C│[7C│[12C│[33;1H│[17C│[7C│[12C││[17C│[7C│[12C│[34;1H│[17C│[7C│[12C││[17C│[7C│[12C│[35;1H│                 │       │            ││                 │       │            │[36;1H│[17C│[7C│[12C││[17C│[7C│[12C│[37;1H│[17C│[7C│[12C││[17C│[7C│[12C│[38;1H│                 │       │    [8C││[17C│[7C│[12C│[39;1H│[17C│[7C│[12C││[17C│[7C│[12C│[40;1H│[17C│[7C│[12C││[17C│[7C│[12C│[41;1H│[17C│[7C│[12C││[17C│[7C│[12C│[42;1H├──────────────────────────────────────┤├──────────────────────────────────────┤[43;1H│ grub.cfg[29C││UP--DIR[31C│[44;1H└─────────────────── 953M/1014M (94%) ─┘└─────────────────── 953M/1014M (94%) ─┘[46;1H[39m[49m#[K[47;11H[30m[46mMenu  [97m[40m 3[30m[46mView  [97m[40m 4[30m[46mEdit  [10CRenMov[97m[40m 7[30m[46mMkdir [46;3H[7;79H[97m[44m5[9;26H[30m[46m4[12C5[46;3H]0;mc [root@lvm]:/boot/grub2>[14;13H[47m                                                        [15;13H ┌──────────────[34m The Midnight Commander [30m──────────────┐ [16;13H │ Do you really want to quit the Midnight Commander? │ [17;13H ├────────────────────────────────────────────────────┤ [18;13H │                  [46m[ [34mY[30mes ][47m  [ [34mN[30mo ]                   │ [19;13H └────────────────────────────────────────────────────┘ [20;13H                                                        [18;35H[45;7H[39m[49m%D/%T expands to the tagged files in the opposite directory.[K[45;80H[1;1H[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K[1;80H[?1015l[?1002l[?1001r[?1l>[47;1H(B[m[39;49m[K[?1049l[?47l8[m[39;49m
+]0;root@lvm:/boot/grub2[root@lvm grub2]# exit
+exit
+]0;vagrant@lvm:~[vagrant@lvm ~]$ exit
+exit
+
+Script done on Mon 12 Feb 2024 08:55:43 AM UTC
+Script started on Mon 12 Feb 2024 09:03:24 AM UTC
+]0;vagrant@lvm:~[?1034h[vagrant@lvm ~]$ ls -l
+total 40
+-rw-rw-r--. 1 vagrant vagrant 38464 Feb 12 09:00 log1
+-rw-rw-r--. 1 vagrant vagrant     0 Feb 12 09:03 log2
+]0;vagrant@lvm:~[vagrant@lvm ~]$ lsblk
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                       8:0    0   40G  0 disk 
+├─sda1                    8:1    0    1M  0 part 
+├─sda2                    8:2    0    1G  0 part /boot
+└─sda3                    8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol01 253:1    0  1.5G  0 lvm  [SWAP]
+  └─VolGroup00-LogVol00 253:2    0 37.5G  0 lvm  
+sdb                       8:16   0   10G  0 disk 
+└─vg_root-lv_root       253:0    0   10G  0 lvm  /
+sdc                       8:32   0    2G  0 disk 
+sdd                       8:48   0    1G  0 disk 
+sde                       8:64   0    1G  0 disk 
+]0;vagrant@lvm:~[vagrant@lvm ~]$ lvremove /dev/VolGroup00/LogVol00[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@s[1@u[1@d[1@o[1@ 
+Do you really want to remove active logical volume VolGroup00/LogVol00? [y/n]: y
+  Logical volume "LogVol00" successfully removed
+]0;vagrant@lvm:~[vagrant@lvm ~]$ lvcreate -n VolGroup00/LogVol00 -L 8G /dev/VolGroup00[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@s[1@u[1@d[1@o[1@ 
+WARNING: xfs signature detected on /dev/VolGroup00/LogVol00 at offset 0. Wipe it? [y/n]: y
+  Wiping xfs signature on /dev/VolGroup00/LogVol00.
+  Logical volume "LogVol00" created.
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo mkfs.xfs /dev/VolGroup00/LogVol00
+meta-data=/dev/VolGroup00/LogVol00 isize=512    agcount=4, agsize=524288 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=2097152, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo mount /dev/VolGroup00/LogVol00 /mnt
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo xfsdump -J - /dev/vg_root/lv_root | xfsrestore -J - /mnt[1@suxfsrestore -J - /mnt [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdxfsrestore -J - /mntt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Coxfsrestore -J - /mnt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C xfsrestore -J - /mnt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsdump: level 0 dump of lvm:/
+xfsdump: dump date: Mon Feb 12 09:05:09 2024
+xfsdump: session id: 03f249c6-6441-40a2-a327-699f59b01bcf
+xfsdump: session label: ""
+xfsrestore: searching media for dump
+xfsdump: ino map phase 1: constructing initial dump list
+xfsdump: ino map phase 2: skipping (no pruning necessary)
+xfsdump: ino map phase 3: skipping (only one dump stream)
+xfsdump: ino map construction complete
+xfsdump: estimated dump size: 944662272 bytes
+xfsdump: creating dump session media file 0 (media 0, file 0)
+xfsdump: dumping ino map
+xfsdump: dumping directories
+xfsrestore: examining media file 0
+xfsrestore: dump description: 
+xfsrestore: hostname: lvm
+xfsrestore: mount point: /
+xfsrestore: volume: /dev/mapper/vg_root-lv_root
+xfsrestore: session time: Mon Feb 12 09:05:09 2024
+xfsrestore: level: 0
+xfsrestore: session label: ""
+xfsrestore: media label: ""
+xfsrestore: file system id: 7c2f3337-333a-4154-95e2-3e77e4cd44e6
+xfsrestore: session id: 03f249c6-6441-40a2-a327-699f59b01bcf
+xfsrestore: media id: 91acf89f-c4ce-46ce-a29c-f06dfdade614
+xfsrestore: searching media for directory dump
+xfsrestore: reading directories
+xfsdump: dumping non-directory files
+xfsrestore: 3123 directories and 26895 entries processed
+xfsrestore: directory post-processing
+xfsrestore: restoring non-directory files
+xfsdump: ending media file
+xfsdump: media file size 916435224 bytes
+xfsdump: dump size (non-dir files) : 901279472 bytes
+xfsdump: dump complete: 23 seconds elapsed
+xfsdump: Dump Status: SUCCESS
+xfsrestore: restore complete: 23 seconds elapsed
+xfsrestore: Restore Status: SUCCESS
+]0;vagrant@lvm:~[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /m nt/$i; done[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csmount --bind $i /m[1@n[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cumount --bind $i /[1@m[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdmount --bind $i [1@/[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Comount --bind $i[1@ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+bash: sudomount: command not found
+bash: sudomount: command not found
+bash: sudomount: command not found
+bash: sudomount: command not found
+bash: sudomount: command not found
+]0;vagrant@lvm:~[vagrant@lvm ~]$ for i in /proc/ /sys/ /dev/ /run/ /boot/; do sudomount --bind $ii /mnt/$i; done[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C mount --bind $[1@i[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;vagrant@lvm:~[vagrant@lvm ~]$ chroot /mnt/[1@s[1@u[1@d[1@o[1@ 
+]0;root@lvm:/[?1034h[root@lvm /]# grub2-mkconfig -o /boot/grub2/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.10.0-862.2.3.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img
+done
+]0;root@lvm:/[root@lvm /]# cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i| sed "s/initramfs-//g;s/.img//g"` --force; done
+Executing: /sbin/dracut -v initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64 --force
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+*** Including module: bash ***
+*** Including module: nss-softokn ***
+*** Including module: i18n ***
+*** Including module: drm ***
+*** Including module: plymouth ***
+*** Including module: dm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 60-persistent-storage-dm.rules
+Skipping udev rule: 55-dm.rules
+*** Including module: kernel-modules ***
+Omitting driver floppy
+*** Including module: lvm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 56-lvm.rules
+Skipping udev rule: 60-persistent-storage-lvm.rules
+*** Including module: qemu ***
+*** Including module: resume ***
+*** Including module: rootfs-block ***
+*** Including module: terminfo ***
+*** Including module: udev-rules ***
+Skipping udev rule: 40-redhat-cpu-hotplug.rules
+Skipping udev rule: 91-permissions.rules
+*** Including module: biosdevname ***
+*** Including module: systemd ***
+*** Including module: usrmount ***
+*** Including module: base ***
+*** Including module: fs-lib ***
+*** Including module: shutdown ***
+*** Including modules done ***
+*** Installing kernel module dependencies and firmware ***
+*** Installing kernel module dependencies and firmware done ***
+*** Resolving executable dependencies ***
+*** Resolving executable dependencies done***
+*** Hardlinking files ***
+*** Hardlinking files done ***
+*** Stripping files ***
+*** Stripping files done ***
+*** Generating early-microcode cpio image contents ***
+*** No early-microcode cpio image needed ***
+*** Store current command line parameters ***
+*** Creating image file ***
+*** Creating image file done ***
+*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+]0;root@lvm:/boot[root@lvm boot]# pvcreate /dev/sdc /dev/sdd
+  Physical volume "/dev/sdc" successfully created.
+  Physical volume "/dev/sdd" successfully created.
+]0;root@lvm:/boot[root@lvm boot]# vgcreate vg_var /dev/sdc /dev/sdd
+  Volume group "vg_var" successfully created
+]0;root@lvm:/boot[root@lvm boot]# lvcreate -L 950M -m1 -n lv_var vg_var
+  Rounding up size to full physical extent 952.00 MiB
+  Logical volume "lv_var" created.
+]0;root@lvm:/boot[root@lvm boot]# mkfs.ext4 /dev/vg_var/lv_var
+mke2fs 1.42.9 (28-Dec-2013)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+60928 inodes, 243712 blocks
+12185 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=249561088
+8 block groups
+32768 blocks per group, 32768 fragments per group
+7616 inodes per group
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376
+
+Allocating group tables: 0/8   done                            
+Writing inode tables: 0/8   done                            
+Creating journal (4096 blocks): done
+Writing superblocks and filesystem accounting information: 0/8   done
+
+]0;root@lvm:/boot[root@lvm boot]# mount /dev/vg_var/lv_var /mnt
+]0;root@lvm:/boot[root@lvm boot]# cp -aR /var/* /mnt/
+]0;root@lvm:/boot[root@lvm boot]# rsync -avHPSAX /var/ /mnt/
+sending incremental file list
+./
+.updated
+            163 100%    0.00kB/s    0:00:00              163 100%    0.00kB/s    0:00:00 (xfr#1, ir-chk=1023/1025)
+
+sent 142,620 bytes  received 591 bytes  286,422.00 bytes/sec
+total size is 267,306,308  speedup is 1,866.52
+]0;root@lvm:/boot[root@lvm boot]# ls -l /mnt
+total 80
+drwxr-xr-x.  2 root root  4096 Apr 11  2018 [0m[38;5;27madm[0m
+drwxr-xr-x.  5 root root  4096 May 12  2018 [38;5;27mcache[0m
+drwxr-xr-x.  3 root root  4096 May 12  2018 [38;5;27mdb[0m
+drwxr-xr-x.  3 root root  4096 May 12  2018 [38;5;27mempty[0m
+drwxr-xr-x.  2 root root  4096 Apr 11  2018 [38;5;27mgames[0m
+drwxr-xr-x.  2 root root  4096 Apr 11  2018 [38;5;27mgopher[0m
+drwxr-xr-x.  3 root root  4096 May 12  2018 [38;5;27mkerberos[0m
+drwxr-xr-x. 28 root root  4096 Feb 12 09:05 [38;5;27mlib[0m
+drwxr-xr-x.  2 root root  4096 Apr 11  2018 [38;5;27mlocal[0m
+lrwxrwxrwx.  1 root root    11 Feb 12 09:05 [38;5;51mlock[0m -> [38;5;27m../run/lock[0m
+drwxr-xr-x.  8 root root  4096 Feb 12 09:01 [38;5;27mlog[0m
+drwx------.  2 root root 16384 Feb 12 09:08 [38;5;27mlost+found[0m
+lrwxrwxrwx.  1 root root    10 Feb 12 09:05 [38;5;51mmail[0m -> [38;5;27mspool/mail[0m
+drwxr-xr-x.  2 root root  4096 Apr 11  2018 [38;5;27mnis[0m
+drwxr-xr-x.  2 root root  4096 Apr 11  2018 [38;5;27mopt[0m
+drwxr-xr-x.  2 root root  4096 Apr 11  2018 [38;5;27mpreserve[0m
+lrwxrwxrwx.  1 root root     6 Feb 12 09:05 [38;5;51mrun[0m -> [38;5;27m../run[0m
+drwxr-xr-x.  8 root root  4096 May 12  2018 [38;5;27mspool[0m
+drwxrwxrwt.  4 root root  4096 Feb 12 09:07 [48;5;10;38;5;16mtmp[0m
+drwxr-xr-x.  2 root root  4096 Apr 11  2018 [38;5;27myp[0m
+]0;root@lvm:/boot[root@lvm boot]# mkdir /tmp/oldvar && mv /var/* /tmp/oldvar
+]0;root@lvm:/boot[root@lvm boot]# umount /mnt
+]0;root@lvm:/boot[root@lvm boot]# mount /dev/vg_var/lv_var /var
+]0;root@lvm:/boot[root@lvm boot]# echo "`blkid | grep var: | awk '{print $2}'` /var ext4 defaults  0 0" >> /etc/fstab
+]0;root@lvm:/boot[root@lvm boot]# cat /etc/fstab
+
+#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /                       xfs     defaults        0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot                   xfs     defaults        0 0
+/dev/mapper/VolGroup00-LogVol01 swap                    swap    defaults        0 0
+#VAGRANT-BEGIN
+# The contents below are automatically generated by Vagrant. Do not modify.
+#VAGRANT-END
+UUID="37e64e64-4555-427a-9af1-181b7cf96fbc" /var ext4 defaults 0 0
+]0;root@lvm:/boot[root@lvm boot]# exit
+exit
+]0;vagrant@lvm:~[vagrant@lvm ~]$ exit
+exit
+
+Script done on Mon 12 Feb 2024 09:10:09 AM UTC
+Script started on Mon 12 Feb 2024 09:21:07 AM UTC
+]0;vagrant@lvm:~[?1034h[vagrant@lvm ~]$ lvremove /dev/vg_root/lv_root[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@s[1@u[1@d[1@o[1@ 
+Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
+  Logical volume "lv_root" successfully removed
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo vgremove /dev/vg_root
+  Volume group "vg_root" successfully removed
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo pvremove /dev/sdb
+  Labels on physical volume "/dev/sdb" successfully wiped.
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo lvcreate -n LogVol_Home -L 2G /dev/VolGroup00
+  Logical volume "LogVol_Home" created.
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo mkfs.xfs /dev/VolGroup00/LogVol_Home
+meta-data=/dev/VolGroup00/LogVol_Home isize=512    agcount=4, agsize=131072 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=524288, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo mount /dev/VolGroup00/LogVol_Home /mnt/
+]0;vagrant@lvm:~[vagrant@lvm ~]$ df -h
+Filesystem                          Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00     8.0G  939M  7.1G  12% /
+devtmpfs                            110M     0  110M   0% /dev
+tmpfs                               118M     0  118M   0% /dev/shm
+tmpfs                               118M  4.6M  114M   4% /run
+tmpfs                               118M     0  118M   0% /sys/fs/cgroup
+/dev/sda2                          1014M   61M  954M   6% /boot
+/dev/mapper/vg_var-lv_var           922M  264M  594M  31% /var
+tmpfs                                24M     0   24M   0% /run/user/1000
+/dev/mapper/VolGroup00-LogVol_Home  2.0G   33M  2.0G   2% /mnt
+]0;vagrant@lvm:~[vagrant@lvm ~]$ sudo cp -aR /home/* /mnt/
+]0;vagrant@lvm:~[vagrant@lvm ~]$ ls -l /home
+total 0
+drwx------. 3 vagrant vagrant 110 Feb 12 09:21 [0m[38;5;27mvagrant[0m
+]0;vagrant@lvm:~[vagrant@lvm ~]$ ls -l /home/vagrant
+total 56
+-rw-rw-r--. 1 vagrant vagrant 38464 Feb 12 09:00 log1
+-rw-rw-r--. 1 vagrant vagrant 14679 Feb 12 09:18 log2
+-rw-rw-r--. 1 vagrant vagrant     0 Feb 12 09:21 log3
+]0;vagrant@lvm:~[vagrant@lvm ~]$ exit
+exit
+
+Script done on Mon 12 Feb 2024 09:24:58 AM UTC
+Script started on Mon 12 Feb 2024 09:28:38 AM UTC
+]0;root@lvm:/home/vagrant[?1034h[root@lvm vagrant]# exitcat /etc/fstabecho "`blkid | grep var: | awk '{print $2}'` /var ext4 defaullts 0 0" >> /etc/fstab[A[31Pmount /dev/vg_var/lv_var /var
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kls -l /mnt/vagrant/[K
+total 60
+-rw-rw-r--. 1 vagrant vagrant 38464 Feb 12 09:00 log1
+-rw-rw-r--. 1 vagrant vagrant 14679 Feb 12 09:18 log2
+-rw-rw-r--. 1 vagrant vagrant  2703 Feb 12 09:27 log3
+-rw-r--r--. 1 root    root        0 Feb 12 09:28 log4
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# ls -l /mnt/vagrant[K[K[K[K[K[K[K[K[K[K[Khome
+total 0
+drwx------. 3 vagrant vagrant 131 Feb 12 09:24 [0m[38;5;27mvagrant[0m
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# rm -rf /home/*
+]0;root@lvm:/home/vagrant[root@lvm vagrant]# rm -rf /home/*[3Pls -l /home
+total 0
+]0;exit
+exit
+
+Script done on Mon 12 Feb 2024 09:30:16 AM UTC
